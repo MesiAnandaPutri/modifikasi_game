@@ -288,3 +288,17 @@ class Game(tk.Frame):
         else:
             self.ball.update()
             self.after(50, self.game_loop)
+
+    def check_collisions(self):
+        ball_coords = self.ball.get_position()
+        items = self.canvas.find_overlapping(*ball_coords)
+        objects = [self.items[x] for x in items if x in self.items]
+        self.ball.collide(objects)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    root.title('Break those Bricks!')
+    game = Game(root)
+    game.mainloop()
+
+
