@@ -35,3 +35,25 @@ class Ball(GameObject):
         x = self.direction[0] * self.speed
         y = self.direction[1] * self.speed
         self.move(x, y)
+        
+    def collide(self, game_objects):
+        coords = self.get_position()
+        x_center = (coords[0] + coords[2]) * 0.5
+
+        if len(game_objects) > 1:
+            self.direction[1] *= -1
+        elif len(game_objects) == 1:
+            game_object = game_objects[0]
+            object_coords = game_object.get_position()
+
+            # Collision with paddle
+            if isinstance(game_object, Paddle):
+                paddle_center = (object_coords[0] + object_coords[2]) * 0.5
+                offset = (x_center - paddle_center) / (game_object.width / 2)
+                self.direction[0] = offset  # Adjust horizontal direction
+                self.direction[1] = -abs(self.direction[1])  # Ensure upward direction
+
+            # Collision with brick
+            elif isinstance(game_object, Brick):
+                self.direction[1] *= -1
+                game_object.hit()
