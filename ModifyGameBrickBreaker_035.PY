@@ -143,3 +143,9 @@ class Game(tk.Frame):
         self.draw_ball_lane()  # Menambahkan garis lane bola
         self.text = self.draw_text(300, 200, f'Level {self.level}\nPress Space to start')
         self.canvas.bind('<space>', lambda _: self.start_game())
+
+        
+    def draw_ball_lane(self):
+        # Menambahkan garis horizontal sebagai lane bola
+        lane_y = self.height - 20  # Lokasi garis sedikit di atas dasar
+        self.canvas.create_line(0, lane_y, self.width, lane_y, fill='black', width=2)
