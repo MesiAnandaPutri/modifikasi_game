@@ -248,3 +248,7 @@ class Game(tk.Frame):
     def add_brick(self, x, y, hits):
         brick = Brick(self.canvas, x, y, hits)
         self.items[brick.item] = brick
+
+    def clear_bricks(self):
+        for item in self.canvas.find_withtag('brick'):
+            self.canvas.delete(item)
