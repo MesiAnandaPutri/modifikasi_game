@@ -109,3 +109,22 @@ class Brick(GameObject):
             self.canvas.itemconfig(self.item,
                                    fill=Brick.COLORS[self.hits])
 
+
+class Game(tk.Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.lives = 3
+        self.level = 1
+        self.score = 0
+        self.width = 610
+        self.height = 400
+        self.canvas = tk.Canvas(self, bg='#D6D1F5',
+                                width=self.width,
+                                height=self.height)
+        self.canvas.pack()
+        self.pack()
+
+        self.items = {}
+        self.ball = None
+        self.paddle = Paddle(self.canvas, self.width / 2, 326)
+        self.items[self.paddle.item] = self.paddle
