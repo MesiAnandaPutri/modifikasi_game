@@ -245,4 +245,6 @@ class Game(tk.Frame):
                         brick = MovingBrick(self.canvas, x, y, hits, random.choice([-1, 1]))
                         self.items[brick.item] = brick
 
-    
+    def add_brick(self, x, y, hits):
+        brick = Brick(self.canvas, x, y, hits)
+        self.items[brick.item] = brick
