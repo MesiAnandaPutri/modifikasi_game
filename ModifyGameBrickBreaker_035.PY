@@ -14,3 +14,24 @@ class GameObject(object):
 
     def delete(self):
         self.canvas.delete(self.item)
+
+class Ball(GameObject):
+    def __init__(self, canvas, x, y):
+        self.radius = 10 
+        self.direction = [1, -1]
+        self.speed = 5 #mengatur kecepatan bola
+        item = canvas.create_oval(x - self.radius, y - self.radius,
+                                  x + self.radius, y + self.radius,
+                                  fill='white')
+        super().__init__(canvas, item)
+
+    def update(self):
+        coords = self.get_position()
+        width = self.canvas.winfo_width()
+        if coords[0] <= 0 or coords[2] >= width:
+            self.direction[0] *= -1
+        if coords[1] <= 0:
+            self.direction[1] *= -1
+        x = self.direction[0] * self.speed
+        y = self.direction[1] * self.speed
+        self.move(x, y)
