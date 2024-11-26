@@ -164,3 +164,28 @@ class Game(tk.Frame):
         x = (paddle_coords[0] + paddle_coords[2]) * 0.5
         self.ball = Ball(self.canvas, x, 310)
         self.paddle.set_ball(self.ball)
+
+    
+    def load_level(self):
+        self.clear_bricks()
+        if self.level == 1:
+            self.create_Pola_Pertama()
+        elif self.level == 2:
+            self.create_Pola_Kedua()
+        elif self.level == 3:
+            self.create_Pola_Ketiga()
+
+    def create_Pola_Pertama(self):
+        rows = 5
+        brick_width = 75
+        brick_height = 20
+        start_y = 50
+
+        for row in range(rows):
+            bricks_in_row = rows - row
+            start_x = (self.width - (bricks_in_row * brick_width)) // 2 + brick_width / 2
+            for col in range(bricks_in_row):
+                x = start_x + col * brick_width
+                y = start_y + row * brick_height
+                hits = (self.level % 3) + 1
+                self.add_brick(x, y, hits)
