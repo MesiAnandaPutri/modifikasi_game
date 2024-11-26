@@ -256,3 +256,10 @@ class Game(tk.Frame):
     def draw_text(self, x, y, text, size='40'):
         font = ('Forte', size)
         return self.canvas.create_text(x, y, text=text, font=font)
+
+    def update_lives_text(self):
+        text = f'Lives: {self.lives}'
+        if self.hud is None:
+            self.hud = self.draw_text(50, 20, text, 15)
+        else:
+            self.canvas.itemconfig(self.hud, text=text)
