@@ -215,3 +215,34 @@ class Game(tk.Frame):
                     y = start_y + row * brick_height
                     hits = (self.level % 3) + 1
                     self.add_brick(x, y, hits)
+
+    
+    def create_Pola_Ketiga(self):
+        class MovingBrick(Brick):
+            def __init__(self, canvas, x, y, hits, direction):
+                super().__init__(canvas, x, y, hits)
+                self.direction = direction  # Direction: 1 for right, -1 for left
+                self.speed = 6  # Kecepatan gerakan
+
+            def update(self):
+                coords = self.get_position()
+                if coords[0] <= 0 or coords[2] >= self.canvas.winfo_width():
+                    self.direction *= -1  # Ubah arah jika mencapai batas layar
+                self.move(self.direction * self.speed, 0)  # Gerakkan balok
+
+            def create_moving_bricks(self):
+                rows = 5
+                cols = 6
+                brick_width = 75
+                brick_height = 20
+                start_y = 50
+
+                for row in range(rows):
+                    for col in range(cols):
+                        x = col * brick_width + brick_width / 2
+                        y = start_y + row * brick_height
+                        hits = (self.level % 3) + 1
+                        brick = MovingBrick(self.canvas, x, y, hits, random.choice([-1, 1]))
+                        self.items[brick.item] = brick
+
+    
