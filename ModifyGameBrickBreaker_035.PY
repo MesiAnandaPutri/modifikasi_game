@@ -149,3 +149,10 @@ class Game(tk.Frame):
         # Menambahkan garis horizontal sebagai lane bola
         lane_y = self.height - 20  # Lokasi garis sedikit di atas dasar
         self.canvas.create_line(0, lane_y, self.width, lane_y, fill='black', width=2)
+
+    def update_score_text(self):
+        text = f'Score: {self.score}'
+        if self.score_text is None:
+            self.score_text = self.draw_text(self.width - 100, 20, text, 15)
+        else:
+            self.canvas.itemconfig(self.score_text, text=text)
