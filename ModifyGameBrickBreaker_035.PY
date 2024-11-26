@@ -252,3 +252,7 @@ class Game(tk.Frame):
     def clear_bricks(self):
         for item in self.canvas.find_withtag('brick'):
             self.canvas.delete(item)
+
+    def draw_text(self, x, y, text, size='40'):
+        font = ('Forte', size)
+        return self.canvas.create_text(x, y, text=text, font=font)
