@@ -135,3 +135,11 @@ class Game(tk.Frame):
         self.canvas.focus_set()
         self.canvas.bind('<Left>', lambda _: self.paddle.move(-10))
         self.canvas.bind('<Right>', lambda _: self.paddle.move(10))
+
+    def setup_game(self):
+        self.add_ball()
+        self.update_lives_text()
+        self.update_score_text()  # Memperbarui skor saat permainan dimulai
+        self.draw_ball_lane()  # Menambahkan garis lane bola
+        self.text = self.draw_text(300, 200, f'Level {self.level}\nPress Space to start')
+        self.canvas.bind('<space>', lambda _: self.start_game())
