@@ -270,3 +270,21 @@ class Game(tk.Frame):
         self.load_level()
         self.paddle.ball = None
         self.game_loop()
+
+    def game_loop(self):
+        self.check_collisions()
+        num_bricks = len(self.canvas.find_withtag('brick'))
+        if num_bricks == 0:
+            self.level += 1
+            self.ball.speed += 1
+            self.setup_game()
+        elif self.ball.get_position()[3] >= self.height:
+            self.ball.speed = None
+            self.lives -= 1
+            if self.lives < 0:
+                self.draw_text(300, 200, 'You Lose! Game Over!')
+            else:
+                self.after(1000, self.setup_game)
+        else:
+            self.ball.update()
+            self.after(50, self.game_loop)
