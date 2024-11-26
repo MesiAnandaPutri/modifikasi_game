@@ -263,3 +263,10 @@ class Game(tk.Frame):
             self.hud = self.draw_text(50, 20, text, 15)
         else:
             self.canvas.itemconfig(self.hud, text=text)
+
+    def start_game(self):
+        self.canvas.unbind('<space>')
+        self.canvas.delete(self.text)
+        self.load_level()
+        self.paddle.ball = None
+        self.game_loop()
