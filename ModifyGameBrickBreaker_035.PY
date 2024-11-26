@@ -128,3 +128,10 @@ class Game(tk.Frame):
         self.ball = None
         self.paddle = Paddle(self.canvas, self.width / 2, 326)
         self.items[self.paddle.item] = self.paddle
+
+        self.hud = None
+        self.score_text = None  # Menyimpan referensi ke skor
+        self.setup_game()
+        self.canvas.focus_set()
+        self.canvas.bind('<Left>', lambda _: self.paddle.move(-10))
+        self.canvas.bind('<Right>', lambda _: self.paddle.move(10))
