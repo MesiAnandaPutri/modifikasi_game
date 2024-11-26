@@ -156,3 +156,11 @@ class Game(tk.Frame):
             self.score_text = self.draw_text(self.width - 100, 20, text, 15)
         else:
             self.canvas.itemconfig(self.score_text, text=text)
+
+    def add_ball(self):
+        if self.ball is not None:
+            self.ball.delete()
+        paddle_coords = self.paddle.get_position()
+        x = (paddle_coords[0] + paddle_coords[2]) * 0.5
+        self.ball = Ball(self.canvas, x, 310)
+        self.paddle.set_ball(self.ball)
