@@ -189,3 +189,29 @@ class Game(tk.Frame):
                 y = start_y + row * brick_height
                 hits = (self.level % 3) + 1
                 self.add_brick(x, y, hits)
+
+    def create_Pola_Kedua(self):
+        rows = 8
+        cols = 8
+        brick_width = 75
+        brick_height = 20
+        start_y = 50
+
+        maze = [
+            [1, 1, 0, 1, 0, 1, 1, 1],
+            [1, 0, 1, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 1, 1, 1, 1],
+            [0, 1, 0, 1, 1, 0, 0, 1],
+            [1, 0, 1, 0, 1, 1, 1, 0],
+            [1, 1, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 1, 0, 1, 1, 1],
+            [1, 1, 0, 1, 1, 0, 0, 1]
+        ]
+
+        for row in range(rows):
+            for col in range(cols):
+                if maze[row][col] == 1:  # Menambahkan balok di posisi yang tidak kosong
+                    x = col * brick_width + brick_width / 2
+                    y = start_y + row * brick_height
+                    hits = (self.level % 3) + 1
+                    self.add_brick(x, y, hits)
